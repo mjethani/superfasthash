@@ -1,0 +1,36 @@
+{
+  "name": "superfasthash",
+  "version": "0.1.0",
+  "description": "An implementation of the SuperFastHash non-cryptographic hashing algorithm in JavaScript and WebAssembly",
+  "author": {
+    "name": "Manish Jethani",
+    "email": "manish.jethani@gmail.com",
+    "url": "https://manishjethani.com/"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "node buildwasm.js",
+    "test": "tape tests/**/*.js | tap-spec",
+    "benchmark": "tape benchmarks/**/*.js | tap-spec",
+    "docs": "jsdoc -d docs *.js src/js/*.js"
+  },
+  "keywords": [
+    "hashing",
+    "superfasthash"
+  ],
+  "license": "ISC",
+  "devDependencies": {
+    "assemblyscript": "AssemblyScript/assemblyscript#f9a8d2f",
+    "uglify-js": "^3.5.1",
+    "tap-spec": "^5.0.0",
+    "tape": "^4.10.1",
+    "jsdoc": "^3.5.5"
+  },
+  "engines": {
+    "node": ">=10.10.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mjethani/superfasthash.git"
+  }
+}
