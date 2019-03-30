@@ -32,32 +32,29 @@ function hash(message) {
     return 0;
 
   let index = 0;
-
-  let nextUint8 = () => message[index++];
-  let nextUint16 = () => nextUint8() | nextUint8() << 8;
-
   let digest = length;
 
   for (let n = length >> 2; n > 0; n--) {
-    digest = digest + nextUint16() >>> 0;
-    digest ^= digest << 16 >>> 0 ^ nextUint16() << 11;
+    digest = digest + (message[index++] | message[index++] << 8) >>> 0;
+    digest ^= digest << 16 >>> 0 ^
+              (message[index++] | message[index++] << 8) << 11;
     digest = digest + (digest >>> 11) >>> 0;
   }
 
   switch (length & 3) {
   case 3:
-    digest = digest + nextUint16() >>> 0;
+    digest = digest + (message[index++] | message[index++] << 8) >>> 0;
     digest ^= digest << 16 >>> 0;
-    digest ^= nextUint8() << 18;
+    digest ^= message[index++] << 18;
     digest = digest + (digest >>> 11) >>> 0;
     break;
   case 2:
-    digest = digest + nextUint16() >>> 0;
+    digest = digest + (message[index++] | message[index++] << 8) >>> 0;
     digest ^= digest << 11 >>> 0;
     digest = digest + (digest >>> 17) >>> 0;
     break;
   case 1:
-    digest = digest + nextUint8() >>> 0;
+    digest = digest + message[index++] >>> 0;
     digest ^= digest << 10 >>> 0;
     digest = digest + (digest >>> 1) >>> 0;
   }
