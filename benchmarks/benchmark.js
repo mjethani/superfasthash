@@ -57,8 +57,7 @@ let randomMessage = () => crypto.randomBytes(Math.ceil(Math.random() * 1000));
 
       console.time(label);
 
-      for (let message of messages)
-        hash(message);
+      messages.forEach(hash);
 
       console.timeEnd(label);
 
