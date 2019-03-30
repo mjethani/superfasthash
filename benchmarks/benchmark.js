@@ -29,8 +29,13 @@ let randomMessage = () => crypto.randomBytes(Math.ceil(Math.random() * 1000));
   await wasmImpl.initialize();
 
   test('Benchmark', t => {
+    let numIterations = 1e6;
+
+    if (process.env.ITERATIONS)
+      numIterations = Math.abs(process.env.ITERATIONS | 0);
+
     let messages = [];
-    for (let i = 0; i < 1e6; i++)
+    for (let i = 0; i < numIterations; i++)
       messages.push(randomMessage());
 
     let toAlgo =
@@ -57,7 +62,7 @@ let randomMessage = () => crypto.randomBytes(Math.ceil(Math.random() * 1000));
 
       console.timeEnd(label);
 
-      t.pass('1,000,000 hashes');
+      t.pass(`${numIterations.toLocaleString()} hashes`);
     }
 
     runBenchmark('SuperFastHash (js)');
