@@ -18,43 +18,43 @@ export function hash(messageLength: u32): u32 {
   if (messageLength == 0)
     return 0;
 
-  let index: u32 = 0;
-  let digest: u32 = messageLength;
+  let index = 0;
+  let digest = messageLength;
 
-  for (let n: u32 = messageLength >> 2; n > 0; n--) {
-    digest = digest + load<u16>(index);
+  for (let n = messageLength >> 2; n > 0; n--) {
+    digest += load<u16>(index);
     index += 2;
     digest ^= digest << 16 ^ load<u16>(index) << 11;
     index += 2;
-    digest = digest + (digest >>> 11);
+    digest += digest >> 11;
   }
 
   switch (messageLength & 3) {
   case 3:
-    digest = digest + load<u16>(index);
+    digest += load<u16>(index);
     index += 2;
     digest ^= digest << 16;
     digest ^= load<u8>(index++) << 18;
-    digest = digest + (digest >>> 11);
+    digest += digest >> 11;
     break;
   case 2:
-    digest = digest + load<u16>(index);
+    digest += load<u16>(index);
     index += 2;
     digest ^= digest << 11;
-    digest = digest + (digest >>> 17);
+    digest += digest >> 17;
     break;
   case 1:
-    digest = digest + load<u8>(index++);
+    digest += load<u8>(index++);
     digest ^= digest << 10;
-    digest = digest + (digest >>> 1);
+    digest += digest >> 1;
   }
 
   digest ^= digest << 3;
-  digest = digest + (digest >>> 5);
+  digest += digest >> 5;
   digest ^= digest << 4;
-  digest = digest + (digest >>> 17);
+  digest += digest >> 17;
   digest ^= digest << 25;
-  digest = digest + (digest >>> 6);
+  digest += digest >> 6;
 
   return digest;
 }
