@@ -15,9 +15,6 @@
  */
 
 export function hash(messageLength: u32): u32 {
-  if (messageLength == 0)
-    return 0;
-
   let index = 0;
   let digest = messageLength;
 

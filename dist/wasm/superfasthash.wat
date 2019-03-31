@@ -12,12 +12,6 @@
   (local $2 i32)
   (local $3 i32)
   local.get $0
-  i32.eqz
-  if
-   i32.const 0
-   return
-  end
-  local.get $0
   local.tee $1
   i32.const 2
   i32.shr_u
