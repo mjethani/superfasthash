@@ -20,11 +20,11 @@
   ],
   "license": "ISC",
   "devDependencies": {
-    "assemblyscript": "AssemblyScript/assemblyscript#f9a8d2f",
-    "uglify-js": "^3.5.1",
+    "assemblyscript": "github:AssemblyScript/assemblyscript",
+    "jsdoc": "^3.5.5",
     "tap-spec": "^5.0.0",
     "tape": "^4.10.1",
-    "jsdoc": "^3.5.5"
+    "uglify-js": "^3.5.1"
   },
   "engines": {
     "node": ">=10.10.0"

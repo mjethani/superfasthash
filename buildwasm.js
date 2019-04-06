@@ -85,8 +85,6 @@ function generateCode(data) {
 }
 
 (function () {
-  let source = readFileSync('src/wasm/superfasthash.ts');
-
   asc([
     'src/wasm/superfasthash.ts',
     '-b',
