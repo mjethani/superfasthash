@@ -80,18 +80,22 @@
       br $break|1
      end
      local.get $2
-     i32.load16_u
+     i32.load
+     local.tee $0
+     i32.const 65535
+     i32.and
      local.get $1
      i32.add
-     local.tee $0
-     local.get $0
+     local.tee $1
+     local.get $1
      i32.const 16
      i32.shl
      i32.xor
-     local.get $2
-     i32.const 2
-     i32.add
-     i32.load8_u
+     local.get $0
+     i32.const 16
+     i32.shr_u
+     i32.const 255
+     i32.and
      i32.const 18
      i32.shl
      i32.xor

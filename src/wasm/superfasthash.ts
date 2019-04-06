@@ -28,20 +28,19 @@ export function hash(messageLength: u32): u32 {
 
   switch (messageLength & 3) {
     case 3:
-      digest += load<u16>(index);
-      index += 2;
+      let value = load<u32>(index);
+      digest += value & 0xFFFF;
       digest ^= digest << 16;
-      digest ^= load<u8>(index++) << 18;
+      digest ^= (value >> 16 & 0xFF) << 18;
       digest += digest >> 11;
       break;
     case 2:
       digest += load<u16>(index);
-      index += 2;
       digest ^= digest << 11;
       digest += digest >> 17;
       break;
     case 1:
-      digest += load<u8>(index++);
+      digest += load<u8>(index);
       digest ^= digest << 10;
       digest += digest >> 1;
   }
